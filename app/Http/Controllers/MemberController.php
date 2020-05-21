@@ -90,4 +90,12 @@ class MemberController extends Controller
        return view('member_register_complete',['form' => Member::find($member->user_id)]);
        }
   }
+
+  //吉川さん
+  public function search_member(){
+      return view('member_search');
+    }
+    public function find_member(Request $request){
+      return view('member_search_result', ['user_email'=>$request]);
+    }
 }

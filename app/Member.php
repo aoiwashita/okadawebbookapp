@@ -5,7 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
-{ //杉澤さん
+{ //岩下
+
+
+  //杉澤さん
   // 会員編集のバリデーション
   protected $guarded = array('user_id');
 
