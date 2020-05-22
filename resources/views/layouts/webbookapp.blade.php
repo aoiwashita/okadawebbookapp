@@ -1,8 +1,14 @@
--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
+    <style media="screen">
+      .errorMsg{
+        color: Red;
+        font-size: 80%;
+      }
+    </style>
   </head>
   <body>
     <!--ヘッダー -->

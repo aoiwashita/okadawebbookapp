@@ -11,6 +11,10 @@
   .form_items{
     margin-right: 2rem;
   }
+  table th{
+    text-align: left;
+    margin-right: 2rem;
+  }
   .back_button{
     background-color: lightgray;
   }
