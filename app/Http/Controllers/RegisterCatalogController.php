@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class RegisterCatalogController extends Controller
 {
+  //岩下
   public function remove_document(Request $request)
   {
     $catalog_id = 1; //$request
