@@ -40,7 +40,33 @@
       <th>廃棄年月日</th><td><input type="text" name="disposal_date" value="<?php echo date('Y/m/j');?>" required></td>
     </tr>
     <tr>
+      <th></th>
+      <td><?php $__errorArgs = ['disposal_date'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+      <span class="errorMsg"><?php echo e($message); ?></span>
+      <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></td>
+    </tr>
+    <tr>
       <th>備考</th><td><input type="text" name="catalog_remark"></td>
+      <tr>
+        <th></th>
+        <td><?php $__errorArgs = ['catalog_remark'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+        <span class="errorMsg"><?php echo e($message); ?></span>
+        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?></td>
+      </tr>
     </tr>
     <tr>
       <th><button type="button" name="back" class="back_button" onclick="histry()">戻る</button></th>

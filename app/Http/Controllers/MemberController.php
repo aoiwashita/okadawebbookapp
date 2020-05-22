@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MemberController extends Controller
-{
+{   //岩下
     public function remove_member(Request $request)
     {
-      $user_id = 1; //$request
+      $user_id = $request->user_id; //$request
       $item = DB::table('members')->where('user_id',$user_id)->first();
       return view('member_withdrawal',['item'=>$item]);
     }
@@ -24,9 +25,9 @@ class MemberController extends Controller
     //杉澤さん
     public function edit_member(Request $request){
       // 会員情報をDBから取ってくる処理など記述する箇所
-      $user_id = 1; # あとで$id = $request->id;に書き換えよう
+      $user_id = $request->user_id; # あとで$id = $request->id;に書き換えよう
       $user_data = DB::table('members')->where('user_id', $user_id)->first();
-      return view('member_edit', ['user_data' => $user_data]);
+      return view('member_edit', ['user_data' => $user_data,'user_id' => $user_id]);
     }
 
     public function edit_member_check(Request $request){
@@ -42,7 +43,7 @@ class MemberController extends Controller
       //
       $request->session()->put($edit_member_data);
       // 教科書p219参考
-      $user_id = 1; //TODO あとで変える
+      $user_id = $request->user_id; //TODO あとで変える
       $param = [
         'user_name' => $request->user_name,
         'user_address' => $request->user_address,
@@ -93,9 +94,40 @@ class MemberController extends Controller
 
   //吉川さん
   public function search_member(){
-      return view('member_search');
+     return view('member_search', ['msg'=>'メールアドレスを入力して下さい。']);
+   }
+
+   public function find_member(Request $request)
+   {
+     //メールアドレスが入力されているかチェック
+     $member_search_rules = [
+       'user_email' => 'required|email',
+     ];
+
+    $member_search_messages = [
+      'user_email.required' => 'メールアドレスは必ず入力して下さい。',
+      'user_email.email' => '正しいメールアドレスの形で入力してください。'
+    ];
+    $validator = Validator::make($request->all(), $member_search_rules,
+    $member_search_messages);
+
+    if ($validator->fails()) {
+      return redirect('/member_search')
+      ->withErrors($validator)
+      ->withInput();
     }
-    public function find_member(Request $request){
-      return view('member_search_result', ['user_email'=>$request]);
-    }
+    //会員テーブルにメールアドレスが存在するかチェック
+     // $item = Document::where('user_email', $request->user_email)->first();
+     $user_email = $request->user_email;
+     $item = DB::table('members')->where('user_email', $user_email)->first();
+     if ($item === NULL) {
+       $validator->errors()->add('no_user_email', 'このメールアドレスは存在しません。');
+       return redirect('/member_search')
+       ->withErrors($validator)
+       ->withInput();
+     }
+
+      return view('member_search_result', ['user_email' => $user_email, 'item' => $item]);
+   }
+
 }

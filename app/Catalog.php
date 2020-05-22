@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Catalog extends Model
 {
+  //杉澤さん
   // 資料追加確認のバリデーション
 protected $guarded = array('catalog_id');
 // TODO バリデーションにはじかれた際に無限ループに入ってしまう問題の解消

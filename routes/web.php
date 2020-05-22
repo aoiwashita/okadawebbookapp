@@ -28,6 +28,7 @@ Route::get('after_login_top', function(){
 
 //岩下
 Route::get('/member_withdrawal', 'MemberController@remove_member');
+Route::post('/member_withdrawal', 'MemberController@remove_member');
 Route::post('/member_withdrawal_complete', 'MemberController@delete_member');
 Route::get('/member_withdrawal_complete', function(){
   return view('member_withdrawal_complete');});
@@ -68,9 +69,7 @@ Route::get('/document_search_result', function () {
 });
 
 //吉川さん
-Route::get('/member_search', function (){
-  return view('member_search');
-});
+Route::get('/member_search', 'MemberController@search_member');
 Route::get('/member_search_result', function (){
   return view('member_search_result');
 });

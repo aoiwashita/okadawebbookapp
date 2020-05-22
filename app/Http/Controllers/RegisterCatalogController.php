@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Catalog;
 use App\Register;
 use Illuminate\Http\Request;
@@ -9,9 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class RegisterCatalogController extends Controller
 {
-  //岩下
   public function remove_document(Request $request)
   {
+    //岩下
     $catalog_id = 1; //$request
     $item = DB::table('registers')->join('catalogs','registers.catalog_number','=','catalogs.catalog_number')
     ->where('registers.catalog_id',$catalog_id)->first();
@@ -20,7 +21,9 @@ class RegisterCatalogController extends Controller
 
   public function delete_document(Request $request)
   {
-    //廃棄年月日と尾行を追記
+    //$validator = validate::make($request->all(),$document_delete_rules,$document_delete_messages);
+    $this->validate($request, Register::$document_delete_rules, Register::$document_delete_messages);
+    //廃棄年月日と備考を追記
     $param = ['disposal_date' => $request -> disposal_date,
               'catalog_remark' => $request -> catalog_remark,];
     $data = DB::table('registers')->where('catalog_id', $request->catalog_id)->update($param);
