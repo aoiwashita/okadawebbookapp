@@ -30,11 +30,11 @@ Route::get('after_login_top', function(){
 Route::get('/member_withdrawal', 'MemberController@remove_member');
 Route::post('/member_withdrawal_complete', 'MemberController@delete_member');
 Route::get('/member_withdrawal_complete', function(){
-  return view('member_withdrawal_complete');})
+  return view('member_withdrawal_complete');});
 
-Route::get('document_delete', 'RegisterCatalogController@remove_document');
-Route::post('document_delete_complete', 'RegisterCatalogController@delete_document');
-Route::get('document_delete_complete', function(){
+Route::get('/document_delete', 'RegisterCatalogController@remove_document');
+Route::post('/document_delete_complete', 'RegisterCatalogController@delete_document');
+Route::get('/document_delete_complete', function(){
   return view('document_delete_complete');});
 
 //杉澤さん
